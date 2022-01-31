@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:ital@0;1&family=Ubuntu+Condensed&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #000428;  /* fallback for old browsers */
+   background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   overflow: hidden;
+}
+.background--custom {
+    background-color: #FFFFFF;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    overflow: hidden;
+    z-index: -2;
+    top: 0;
+    left: 0;
+  }
+  canvas#canvas {
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(10deg) scale(2) translateY(0%);
+    --gradient-color-1: #004e92; 
+    --gradient-color-2: #000428; 
+    --gradient-color-3: #000428;  
+    --gradient-color-4: #004e92;
+    --gradient-speed: 0.000029999999999999997;
+  }
