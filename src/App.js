@@ -1,10 +1,16 @@
 import './App.css';
+/* Cloudinary */
+import { CloudinaryContext } from "cloudinary-react";
+
+import ShareHere from './components/ShareHere';
 
 function App() {
   return (
-    <div className="App">
-     
-    </div>
+    <CloudinaryContext cloudName="dtqzhg98l">
+    
+     <ShareHere />
+    
+     </CloudinaryContext>
   );
 }
 
