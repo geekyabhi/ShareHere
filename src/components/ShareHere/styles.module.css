@@ -136,3 +136,10 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
+
+
+.uploadedImg{
+	width:40%;
+	height:100px;
+	 margin-bottom: 5px;
+}
