@@ -14,7 +14,7 @@ const sendMail = async (req, res, next) => {
 		const result = await sendEmail(email, url, message);
 		res.status(200).send({
 			success: true,
-			data: result,
+			data: "Mail send successfully !",
 		});
 	} catch (e) {
 		next(e);
