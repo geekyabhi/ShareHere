@@ -49,7 +49,7 @@
 }
 
 .rightSection {
-	background-color: white;
+	background-color: #004e92;
 	width: 18rem;
 	padding: 4px;
 	height: 75vh;
@@ -95,11 +95,12 @@
 	color: #004e92;
 	font-weight: 700;
 	font-size: 1.2rem;
+	margin-top: 0px;
 }
 .formField {
 	display: block;
 	margin-left: auto;
-	width: 16rem;
+	width: 14rem;
 	padding: 10px 13px;
 	margin-top: 4px;
 }
@@ -124,10 +125,10 @@
 	font-weight: 1000;
 }
 .logoText {
-	margin-top: 30px;
+	margin-top: 40px;
 	color: #000428;
 	font-family: "Open Sans", sans-serif;
-	font-size: 1.7rem;
+	font-size: 1.2rem;
 	background: -webkit-linear-gradient(#000428, #004e92);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
