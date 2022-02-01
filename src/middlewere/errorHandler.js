@@ -1,7 +1,5 @@
 const ENRIVONMENT = process.env.NODE_ENV;
 
-console.log(ENRIVONMENT);
-
 const errorHandler = (err, req, res, next) => {
 	let error = String(err).split(":")[1].trim();
 	console.log(err);
