@@ -24,19 +24,25 @@ const ShareHere = () => {
 	const [loading, setloading] = useState(false);
 	const [count, setCount] = useState(0);
 	const [status, setStatus] = useState(0)
-	const [cloudinaryMsg,setCloudinarySuccessMsg] = useState('')
-
+	const [cloudinaryMsg, setCloudinarySuccessMsg] = useState('')
+	const [error, seterror] = useState(null)
 	const [show, setShow] = useState(false);
+	const [fileFormat, setFileFormat] = useState('');
+	const [fileName, setFileName] = useState('')
+	const handleClose = () => {
+		setStatus(0)
+		setReceiverEmail('')
+		setShow(false);
+	}
 
-	const handleClose = () => setShow(false);
-	
 	const handleShow = (params) => {
-		if(!fileUrl){
+		if (!fileUrl) {
 			alert('Upload Files Before Sending')
 		}
-		else{
-		if (params === 'msg') setCount(1)
-		setShow(true);
+		else {
+			if (params === 'msg') setCount(1)
+			else setCount(0)
+			setShow(true);
 		}
 	}
 
@@ -56,42 +62,62 @@ const ShareHere = () => {
 	const formSubmitHandler = async (e) => {
 		e.preventDefault();
 		try {
-			let path = '';
-			let obj = {};
-			if (count === 0) {
-				path = 'send-mail';
-				obj = {
-					url: String(fileUrl),
-					email: receiverEmail,
-					message: textMsg
+			if (receiverEmail || mobileNumber) {
+				let path = '';
+				let obj = {};
+				if (count === 0) {
+					path = 'send-mail';
+					obj = {
+						url: String(fileUrl),
+						email: receiverEmail,
+						message: textMsg
+					};
+				}
+				else {
+					path = 'send-message';
+					obj = {
+						url: String(fileUrl),
+						number: mobileNumber,
+						message: textMsg
+					};
+				}
+				const config = {
+					headers: {
+						"Content-Type": "application/json"
+					},
 				};
+
+				setloading(true)
+				console.log(url)
+				const { data } = await axios.post(
+					`${url}/api/${path}/`,
+					obj,
+					config
+				);
+				setloading(false)
+				console.log('data' + data.success)
+				if (data) {
+					if (data.success) {
+						setStatus(1)
+					}
+					else {
+						setStatus(2)
+						seterror(data.error);
+					}
+				}
 			}
 			else {
-				path = 'send-message';
-				obj = {
-					url: String(fileUrl),
-					number: mobileNumber,
-					message: textMsg
-				};
-			}
-			
-			setloading(true)
-			console.log(url)
-			const { data } = await axios.post(
-				`${url}/api/${path}/`,
-				obj
-			);
-			setloading(false)
-
-			if (data)
-				setStatus(1)
-			else
 				setStatus(2)
-
+				if (count === 0)
+					seterror('Email Missing')
+				else
+					seterror('Mobile Number Missing')
+			}
 		}
 		catch (e) {
 			setloading(false)
 			setStatus(2);
+			seterror('Some Error Occured');
 		}
 
 	}
@@ -109,8 +135,11 @@ const ShareHere = () => {
 			if (!error) {
 				// console.log(photos);
 				if (photos.event === "success") {
+					console.log(photos.info)
 					console.log(photos.info.secure_url);
 					setFileUrl(photos.info.secure_url)
+					setFileFormat(photos.info.format);
+					setFileName(photos.info.original_filename)
 					setCloudinarySuccessMsg('File Uploaded Successfuly')
 				}
 			} else {
@@ -131,18 +160,24 @@ const ShareHere = () => {
 						</Alert> : null}
 					{status === 2 ?
 						<Alert variant='danger'>
-							File Transfer Unsuccessful
+							{error}
 						</Alert> : null}
 					{count === 0 ?
 						<Form>
-							<img src={fileUrl} className={styles.uploadedImg} alt="fileImg" />
-							<Button style={{marginLeft:'15px'}} variant="primary" onClick={() => beginUpload("image")}>
-							Change File
-						</Button>
+							{
+								(fileFormat === 'png' || fileFormat === 'jpg' || fileFormat === 'jpeg') ?
+									<img src={fileUrl} className={styles.uploadedImg} alt="fileImg" />
+									: <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/File_alt_font_awesome.svg/768px-File_alt_font_awesome.svg.png' 
+									style={{width:'60px',height:'60px'}} className={styles.uploadedImg} alt="fileImg" />
+							}
+							<p className={styles.fileName}>Filename: {fileName}</p>
+							<Button style={{ marginLeft: '30px' }} variant="primary" onClick={() => beginUpload("image")}>
+								Change File
+							</Button>
 							<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
 								<Form.Label>Email address</Form.Label>
 								<Form.Control type="email"
-									required={true}
+									required
 									value={receiverEmail}
 									onChange={handleReceiverEmailChange}
 									placeholder="name@example.com" />
@@ -157,18 +192,27 @@ const ShareHere = () => {
 						</Form>
 						: <form>
 							<Form>
-								<img src={fileUrl} alt="fileImg" />
+							{
+								(fileFormat === 'png' || fileFormat === 'jpg' || fileFormat === 'jpeg') ?
+									<img src={fileUrl} className={styles.uploadedImg} alt="fileImg" />
+									: <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/File_alt_font_awesome.svg/768px-File_alt_font_awesome.svg.png' 
+									style={{width:'60px',height:'60px'}} className={styles.uploadedImg} alt="fileImg" />
+							}
+							<p className={styles.fileName}>Filename: {fileName}</p>
+							<Button style={{ marginLeft: '30px' }} variant="primary" onClick={() => beginUpload("image")}>
+								Change File
+							</Button>
 								<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
 									<Form.Label>Mobile Number</Form.Label>
 									<Form.Control type="text"
-										required={true}
+										required
 										value={mobileNumber}
 										onChange={handleNumberChange}
 										placeholder="name@example.com" />
 								</Form.Group>
 								<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
 									<Form.Label>Enter Your Message</Form.Label>
-									<Form.Control as="textarea" rows={5}
+									<Form.Control as="textarea" rows={3}
 										value={textMsg}
 										onChange={handleMessageChange}
 										placeholder="Enter Your Message" />
@@ -199,23 +243,23 @@ const ShareHere = () => {
 				<div className={styles.formContainer}>
 					<div className={styles.topSection}>
 						{!cloudinaryMsg ?
-						<IconButton
-							onClick={() => beginUpload("image")}
-							aria-label="delete"
-							className={styles.uploadIcon}
-						>
-							<CloudUploadIcon
-								sx={{ fontSize: 60 }}
-								fontSize="large"
-							/>
-						</IconButton> : <Alert variant='primary'>
-						   {cloudinaryMsg}
-						</Alert> }
+							<IconButton
+								onClick={() => beginUpload("image")}
+								aria-label="delete"
+								className={styles.uploadIcon}
+							>
+								<CloudUploadIcon
+									sx={{ fontSize: 60 }}
+									fontSize="large"
+								/>
+							</IconButton> : <Alert variant='primary'>
+								{cloudinaryMsg}
+							</Alert>}
 						{!cloudinaryMsg ?
-						<h3 className={styles.selectTextHeading}>
-							Upload Your Files Here
-						</h3>
-						: null}
+							<h3 className={styles.selectTextHeading}>
+								Upload Your Files Here
+							</h3>
+							: null}
 					</div>
 					<div className={styles.bottomSection}>
 						<h2 className={styles.shareViaText}>Share Via</h2>
