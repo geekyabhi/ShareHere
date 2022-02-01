@@ -1,130 +1,146 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:ital@0;1&family=Ubuntu+Condensed&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:ital@0;1&family=Ubuntu+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600&display=swap");
 
-body{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background: #000428;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    overflow: hidden;
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background: #000428; /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		to right,
+		#004e92,
+		#000428
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right,
+		#004e92,
+		#000428
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	overflow: hidden;
 }
 .background--custom {
-    background-color: #FFFFFF;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    overflow: hidden;
-    z-index: -2;
-    top: 0;
-    left: 0;
-  }
-  canvas#canvas {
-    z-index: -1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform: rotate(10deg) scale(2) translateY(0%);
-    --gradient-color-1: #004e92; 
-    --gradient-color-2: #000428; 
-    --gradient-color-3: #000428;  
-    --gradient-color-4: #004e92;
-    --gradient-speed: 0.000029999999999999997;
-  }
+	background-color: #ffffff;
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	overflow: hidden;
+	z-index: -2;
+	top: 0;
+	left: 0;
+}
+canvas#canvas {
+	z-index: -1;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transform: rotate(10deg) scale(2) translateY(0%);
+	--gradient-color-1: #004e92;
+	--gradient-color-2: #000428;
+	--gradient-color-3: #000428;
+	--gradient-color-4: #004e92;
+	--gradient-speed: 0.000029999999999999997;
+}
 
-
-
-  .google-btn {
-    margin:8px 25px;
-    width: 85%;
-    /* min-width: 184px;
+.google-btn {
+	margin: 12px 25px;
+	padding: 2px;
+	width: 85%;
+	/* min-width: 184px;
     max-width: 304px; */
-    height: 42px;
-    background-color: #fcfcfc;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
-    cursor: pointer;
-    cursor: hand;
-    align-self: center;
-    user-select: none;
-    transition: all 400ms ease 0s;
-    display: flex;
-    
-}
-.google-btn .google-icon-wrapper {
-    position: absolute;
-    margin-top: 1px;
-    margin-left: 1px;
-    width: 100px;
-    height: 100px;
-    border-radius: 2px;
-    user-select: none
-}
-.google-btn .google-icon-svg {
-    position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
-    width: 18px;
-    height: 18px;
-    user-select: none
-}
-.google-btn .btn-text {
-    float: right;
-    text-align: center;
-    margin: 11px 14px 40px 40px;
-    color: #757575;
-    font-size: 14px;
-    letter-spacing: .2px;
-    font-family: Roboto;
-    user-select: none
+	height: 42px;
+	background-color: #fff;
+	border-radius: 2px;
+	box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	border-radius: 10px;
+	cursor: hand;
+	align-self: center;
+	font-family: "Spartan", sans-serif;
+	user-select: none;
+	transition: all 400ms ease 0s;
+	display: flex;
 }
 .google-btn:hover {
-    box-shadow: 0 3px 8px rgba(117, 117, 117, .5);
-    user-select: none
+	width: 90%;
+}
+
+.google-btn .google-icon-wrapper {
+	position: absolute;
+	margin-top: 1px;
+	margin-left: 1px;
+	width: 100px;
+	height: 100px;
+	border-radius: 2px;
+	user-select: none;
+}
+.google-btn .google-icon-svg {
+	position: absolute;
+	margin-top: 11px;
+	margin-left: 11px;
+	width: 18px;
+	height: 18px;
+	user-select: none;
+}
+.google-btn .btn-text {
+	float: right;
+	text-align: center;
+	margin: 11px 14px 40px 40px;
+	color: #757575;
+	font-size: 14px;
+	letter-spacing: 0.2px;
+	font-family: Roboto;
+	user-select: none;
+}
+.google-btn:hover {
+	box-shadow: 0 3px 8px rgba(117, 117, 117, 0.5);
+	user-select: none;
 }
 .google-btn:active {
-    box-shadow: 0 1px 1px #757575;
-    background: #F8F8F8;
-    color: #fff;
-    user-select: none
+	box-shadow: 0 1px 1px #757575;
+	background: #f8f8f8;
+	color: #fff;
+	user-select: none;
 }
 
 .normal-btn {
-    margin: 25px;
-    width: auto;
-    display: inline-block;
-    min-width: auto;
-    max-width: 184px;
-    height: 42px;
-    background-color: #fcfcfc;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
-    cursor: pointer;
-    cursor: hand;
-    align-self: center;-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    transition: all 400ms ease 0s
+	margin: 25px;
+	width: auto;
+	display: inline-block;
+	min-width: auto;
+	max-width: 184px;
+	height: 42px;
+	background-color: #fcfcfc;
+	border-radius: 2px;
+	box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	cursor: hand;
+	align-self: center;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	transition: all 400ms ease 0s;
 }
 .normal-btn .btn-text {
-    float: left;
-    margin: 11px 14px 11px 14px;
-    color: #757575;
-    font-size: 14px;
-    letter-spacing: .2px;
-    font-family: Roboto;
-    user-select: none
+	float: left;
+	margin: 11px 14px 11px 14px;
+	color: #757575;
+	font-size: 14px;
+	letter-spacing: 0.2px;
+	font-family: Roboto;
+	user-select: none;
 }
 .normal-btn:hover {
-    box-shadow: 0 3px 8px rgba(117, 117, 117, .5);
-    user-select: none
+	box-shadow: 0 3px 8px rgba(117, 117, 117, 0.5);
+	user-select: none;
 }
 .normal-btn:active {
-    box-shadow: 0 1px 1px #757575;
-    background: #F8F8F8;
-    color: #fff;
-    user-select: none
+	box-shadow: 0 1px 1px #757575;
+	background: #f8f8f8;
+	color: #fff;
+	user-select: none;
 }

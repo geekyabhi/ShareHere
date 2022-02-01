@@ -49,13 +49,16 @@
 }
 
 .rightSection {
-	background-color: #004e92;
-	width: 18rem;
+	background-color: #2a79c9;
+	width: 25rem;
 	padding: 4px;
 	height: 75vh;
 	border-radius: 8px;
-	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-		rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+	transition: all 0.2s;
+}
+.rightSection:hover {
+	/* transform: scale(1.005); */
+	box-shadow: 1px 1px 20px #0aadda;
 }
 
 .formContainer {
