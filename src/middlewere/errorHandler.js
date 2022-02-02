@@ -14,7 +14,7 @@ const errorHandler = (err, req, res, next) => {
 		const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
 		const productionError =
 			res.statusCode === 200 ? "Internal Server error" : error;
-		res.status(statusCode).send({
+		res.status(200).send({
 			success: false,
 			error: productionError,
 		});
